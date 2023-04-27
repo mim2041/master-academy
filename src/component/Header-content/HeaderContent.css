@@ -1,0 +1,25 @@
+.header-content{
+    background-color: skyblue;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-contents{
+    background-color: rgb(53, 166, 210);
+    background-blend-mode: multiply;
+    border: 1px solid gray;
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.search-field{
+    display: flex;
+}
+.btn-search{
+    padding: 3px 10px;
+    
+}
