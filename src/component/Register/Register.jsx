@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import account from "../../assets/images/account1.png"
+import account from "../../assets/images/account1.png";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import app from '../../firebase/firebase.config';
+import { AuthContext } from '../Provider/AuthProviders';
+
+const auth = getAuth(app)
 
 const Register = () => {
+
+    const [email, setEmail] = useState('');
+    const {createUser} = useContext(AuthContext);
     
     const handleRegister = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        console.log(email, password);
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    const handleEmailChange = event => {
+        setEmail(event.target.value);
     }
 
     return (
@@ -29,7 +50,7 @@ const Register = () => {
                     <p className=' text-white'>Terms and Conditions</p>
                 </div>
                 <Link>
-                    <button className='bg-amber-500 w-full py-2 mb-2 text-lg rounded-lg'>Login</button>
+                    <button className='bg-amber-500 w-full py-2 mb-4 mt-2 text-lg rounded-lg'>Create an Account</button>
                 </Link>
                     <p className='text-center'>Already have an account? <Link to="/login" className='text-amber-500 underline'>
                     Login

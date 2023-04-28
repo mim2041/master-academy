@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import headerLogo from '../../assets/images/logo1.png'
 import { Link } from 'react-router-dom';
 import './Header.css';
 import {  Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+import { AuthContext } from '../Provider/AuthProviders';
 
 const Header = () => {
+    const user = useContext(AuthContext);
     const [open, setOpen] = useState(false);
     return (
         <div className='header'>
