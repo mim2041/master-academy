@@ -11,6 +11,9 @@ import Main from './component/Layout/Main';
 import Course from './component/Course/Course';
 import FAQ from './component/FAQ/FAQ';
 import Home from './component/Home/Home';
+import Courses from './component/Courses/Courses';
+import Login from './component/Login/Login';
+import Register from './component/Register/Register';
 
 const router = createBrowserRouter([
   {
@@ -22,12 +25,20 @@ const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
-        path: "/course",
-        element: <Course></Course>
+        path: "/courses",
+        element: <Courses></Courses>
       },
       {
         path: 'faq',
         element: <FAQ></FAQ>
+      },
+      {
+        path: 'login',
+        element: <Login></Login>
+      },
+      {
+        path: 'register',
+        element: <Register></Register>
       }
     ]
   },

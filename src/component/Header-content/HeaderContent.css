@@ -19,7 +19,16 @@
 .search-field{
     display: flex;
 }
+.search-field input{
+    width: 400px;
+}
 .btn-search{
-    padding: 3px 10px;
+    padding: 3px 15px;
     
+}
+.courses-content{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    gap: 10px;
 }

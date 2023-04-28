@@ -11,9 +11,9 @@ const HeaderContent = () => {
                     <input className='p-3 rounded-lg' type="text" placeholder='Search Your Courses'/>
                     <button className='btn-search bg-slate-500 rounded-lg text-white'>Search</button>
                 </div>
-                <div className='d-flex flex-row'>
-                    <div className='px-5 m-3 py-8 rounded-lg text-white bg-blue-500'>Courses</div>
-                    <div className='px-5 py-8 rounded-lg text-white bg-green-500'>Start Learning</div>
+                <div className='courses-content'>
+                    <div className='px-5 py-5 rounded-lg text-white bg-blue-500'>Courses</div>
+                    <div className='px-5 py-5 rounded-lg text-white bg-green-500'>Start Learning</div>
                 </div>
             </div>
         </div>
