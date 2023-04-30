@@ -6,6 +6,8 @@
 .checkbox{
     display: flex;
     gap: 5px;
+    width: 200px;
+    border: none;
 }
 .check-pass{
     display: flex;

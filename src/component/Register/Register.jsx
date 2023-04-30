@@ -4,33 +4,53 @@ import account from "../../assets/images/account1.png";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from '../../firebase/firebase.config';
 import { AuthContext } from '../Provider/AuthProviders';
+import { Button } from 'react-bootstrap';
 
 const auth = getAuth(app)
 
 const Register = () => {
 
-    const [email, setEmail] = useState('');
-    const {createUser} = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     
     const handleRegister = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        const name = form.name.value;
+        console.log(email, password, name);
+
+        // Password strong conditions
+        if(!/(?=.*[A-Z])/.test(password)){
+            setError('Please add at least one uppercase');
+            return;
+        }
+        else if(!/(?=.*[0-9].*[0-9])/.test(password)){
+            setError('please add atleast 2 numbers');
+            return;
+        }
+        else if(!/(?=.*[!@#$&*])/.test(password)){
+            setError('Please add a special character');
+            return;
+        }
+        else if(password.length < 6){
+            setError('please add at least 6 characters in your password')
+            return;
+        }
 
         createUserWithEmailAndPassword(auth, email, password)
         .then(result => {
             const loggedUser = result.user;
             console.log(loggedUser);
+            setError('');
+            form.reset();
+            setSuccess("User has been created successfully");
         })
         .catch(error => {
-            console.log(error)
+            console.log(error.message);
+            setError(error.message);
         })
-    }
-
-    const handleEmailChange = event => {
-        setEmail(event.target.value);
     }
 
     return (
@@ -49,9 +69,7 @@ const Register = () => {
                     <input type="checkbox" className=' text-white'/>
                     <p className=' text-white'>Terms and Conditions</p>
                 </div>
-                <Link>
-                    <button className='bg-amber-500 w-full py-2 mb-4 mt-2 text-lg rounded-lg'>Create an Account</button>
-                </Link>
+                <Button type="submit" className='bg-amber-500 w-full py-2 mb-4 mt-2 text-lg rounded-lg'>Create an Account</Button>
                     <p className='text-center'>Already have an account? <Link to="/login" className='text-amber-500 underline'>
                     Login
                 </Link></p>
@@ -64,6 +82,8 @@ const Register = () => {
                     <button className='bg-blue-500 px-10 py-8 rounded-lg text-white text-lg'> Continue with Google</button>
                     <button className='bg-green-500 px-10 py-8 rounded-lg text-white text-lg'> Continue with Github</button>
                 </div>
+            <p className='text-danger'>{error}</p>
+            <p>{success}</p>
             </form>
         </div>
     );

@@ -1,16 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import login from '../../assets/images/login.jpg';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { AuthContext } from '../Provider/AuthProviders';
-import { getAuth } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import app from '../../firebase/firebase.config';
 
-
+const auth = getAuth(app);
 
 const Login = () => {
-    const {signIn, signInWithGoogle} = useContext(AuthContext);
-
+    const [success, setSuccess] = useState('');
+    const [error, setError] = useState('');
+    const [user, setUser] = useState(null);
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
+    
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
@@ -18,26 +23,41 @@ const Login = () => {
         const password = form.password.value;
         console.log(email, password);
 
-        signIn(email, password)
+        signInWithEmailAndPassword(auth, email, password)
         .then(result => {
             const loggedUser = result.user;
             console.log(loggedUser);
-            form.reset();
+            setSuccess('User login successful');
+            setError('');
+        })
+        .catch(error => {
+            setError(error.message)
+        })
+
+    }
+
+    const handleGoogleSignIn = () => {
+        signInWithPopup(auth, googleProvider)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            setUser(loggedUser);
         })
         .catch(error => {
             console.log(error);
         })
     }
 
-    const handleGoogleSignIn = () => {
-        signInWithGoogle()
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
-            })
-            .catch(error => {
-                console.log(error)
-            })
+    const handleGithubSignIn = () => {
+        signInWithPopup(auth, githubProvider)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            setUser(loggedUser);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     return (
@@ -71,7 +91,7 @@ const Login = () => {
                 </div>
                 </div>
                 <div className="form-control mt-6">
-                <button onClick={handleGoogleSignIn} className="btn btn-primary">Login</button>
+                <button className="btn btn-primary">Login</button>
                 </div>
                 <p className='text-center'>Don't have an account? <Link to="/register" className='text-amber-500 underline'>
                     Create An Account
@@ -82,9 +102,10 @@ const Login = () => {
                     <hr className='w-1/4'/>
                 </div>
                 <div className='loginWith'>
-                    <button className='bg-blue-500 px-10 py-8 rounded-lg text-white text-lg'>{FaGoogle} Continue with Google</button>
-                    <button className='bg-green-500 px-10 py-8 rounded-lg text-white text-lg'>{FaGithub} Continue with Github</button>
+                    <button  onClick={handleGoogleSignIn} className='bg-blue-500 px-10 py-8 rounded-lg text-white text-lg'>{FaGoogle} Continue with Google</button>
+                    <button onClick={handleGithubSignIn} className='bg-green-500 px-10 py-8 rounded-lg text-white text-lg'>{FaGithub} Continue with Github</button>
                 </div>
+                <p className='text-success'>{success}</p>
             </form>
             </div>
             </div>
