@@ -3,7 +3,7 @@ import headerLogo from '../../assets/images/logo1.png'
 import { Link } from 'react-router-dom';
 import './Header.css';
 import {  Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
-import { AuthContext } from '../Provider/AuthProviders';
+import { AuthContext } from '../../contexts/Provider/AuthProviders';
 
 const Header = () => {
     const user = useContext(AuthContext);
@@ -21,7 +21,7 @@ const Header = () => {
             </div>
             <nav className={`md:flex absolute md:static duration-500 ${open ? 'top-6' : '-top-64'}`}>
                 <Link to="/">Home</Link>
-                <Link to="/course">Course</Link>
+                <Link to="/courses">Courses</Link>
                 <Link to="/faq">FAQ</Link>
                 <Link to="/blog">Blog</Link>
                 <Link to="/mode"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 inline mr-4">

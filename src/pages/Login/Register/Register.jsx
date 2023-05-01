@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import account from "../../assets/images/account1.png";
+import account from "../../../assets/images/account1.png";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import app from '../../firebase/firebase.config';
-import { AuthContext } from '../Provider/AuthProviders';
+import app from '../../../firebase/firebase.config';
 import { Button } from 'react-bootstrap';
 
 const auth = getAuth(app)

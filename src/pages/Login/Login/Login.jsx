@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import login from '../../assets/images/login.jpg';
+import login from '../../../assets/images/login.jpg';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { AuthContext } from '../Provider/AuthProviders';
 import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import app from '../../firebase/firebase.config';
+import app from '../../../firebase/firebase.config';
+
 
 const auth = getAuth(app);
 

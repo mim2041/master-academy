@@ -8,13 +8,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Main from './component/Layout/Main';
-import Course from './component/Course/Course';
-import FAQ from './component/FAQ/FAQ';
-import Home from './component/Home/Home';
-import Courses from './component/Courses/Courses';
-import Login from './component/Login/Login';
-import Register from './component/Register/Register';
-import AuthProviders from './component/Provider/AuthProviders';
+import FAQ from './pages/FAQ/FAQ';
+import AuthProviders from './contexts/Provider/AuthProviders';
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login/Login';
+import Register from './pages/Login/Register/Register';
+import Courses from './pages/Courses/Courses/Courses';
+
 
 const router = createBrowserRouter([
   {
