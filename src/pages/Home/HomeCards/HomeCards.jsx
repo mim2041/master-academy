@@ -16,7 +16,7 @@ const HomeCards = ({course}) => {
                     <li>No of Lecture - {lecture_quantity}</li>
                 </ul>
                 <div className="card-actions justify-end">
-                <button className="btn btn-primary">Details</button>
+                <button className="btn bg-blue-600">Details</button>
                 </div>
             </div>
             </div>
