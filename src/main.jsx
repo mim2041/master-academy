@@ -7,7 +7,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Main from './component/Layout/Main';
+import Main from './Layout/Main';
 import FAQ from './pages/FAQ/FAQ';
 import AuthProviders from './contexts/Provider/AuthProviders';
 import Home from './pages/Home/Home';
